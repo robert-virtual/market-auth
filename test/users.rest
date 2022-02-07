@@ -1,0 +1,14 @@
+
+
+GET http://localhost:3000/api/users/me
+atk: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0NDE5NTQwOCwiZXhwIjoxNjQ0MTk1NDM4fQ.OnhBVQODJZznCNEuqr6AxBamtaBG5a1Sxn45IjT1i8E
+
+
+###
+POST http://localhost:3001/auth/login
+Content-Type: application/json
+
+{
+    "email":"robertocastillo945@gmail.com",
+    "password":"C@stellan0s12"
+}
