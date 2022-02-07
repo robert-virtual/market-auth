@@ -36,7 +36,7 @@ model product {
   id          Int      @id @default(autoincrement())
   name        String
   description String?
-  price       Decimal
+  price       Decimal  @db.Decimal(7, 2)
   quantity    Int
   sold        Boolean  @default(false)
   sellerId    Int
