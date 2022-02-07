@@ -4,16 +4,46 @@ const { PrismaClient } = require("@prisma/client");
 const { genAccessToken, genRefreshToken } = require("../helpers/tokens");
 const prisma = new PrismaClient();
 const jwt = require("jsonwebtoken");
-router.post("/token", async (req, res) => {
-  const { refreshToken } = req.body;
+const auth = require("../middlewares/auth");
+
+// logout
+router.delete("/logout", auth, async (req, res) => {
+  const { userId } = req;
   try {
-    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
-    res.json({ token: genAccessToken() });
+    await prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        refreshToken: null,
+      },
+    });
+    res.status(204).json({ msg: "session cerrada conexito" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
+// refresh token
+router.post("/token", async (req, res) => {
+  const { refreshToken } = req.body;
+  try {
+    let { userId } = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
+    const user = await prisma.user.findUnique({ where: { id: userId } });
+    if (!user) {
+      return res.status(403).json({ error: "Token invalido" });
+    }
+    if (user.refreshToken !== refreshToken) {
+      return res.status(403).json({ error: "Token invalido" });
+    }
+
+    res.json({ token: genAccessToken(user) });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// login
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -31,6 +61,14 @@ router.post("/login", async (req, res) => {
     }
     const token = genAccessToken(user);
     const refreshToken = genRefreshToken(user);
+    await prisma.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        refreshToken,
+      },
+    });
 
     res.json({ token, refreshToken });
   } catch (error) {
