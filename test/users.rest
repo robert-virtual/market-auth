@@ -4,14 +4,14 @@ GET http://localhost:3000/api/users/me
 atk: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0NDE5ODE2MSwiZXhwIjoxNjQ0MTk4MTkxfQ.42OASThIGwg5XqgPxtvixw3uWi4q-8cYYcpNSmGHk94
 
 ### logout
-DELETE http://localhost:3001/auth/logout
+DELETE http://localhost:3001/logout
 atk: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0NDE5Nzk5MSwiZXhwIjoxNjQ0MTk4MDIxfQ.ay_oWdRpVU5uT6ZucB2U_SYETWZwbzHn6opbpGLjryg
 
 
 
 
 ### refresh token
-POST http://localhost:3001/auth/token
+POST http://localhost:3001/token
 Content-Type: application/json
 
 {
@@ -20,7 +20,7 @@ Content-Type: application/json
 
 
 ### login
-POST http://localhost:3001/auth/login
+POST http://localhost:3001/login
 Content-Type: application/json
 
 {
