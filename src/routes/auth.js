@@ -72,7 +72,7 @@ router.post("/login", async (req, res) => {
 
     res.json({ token, refreshToken });
   } catch (error) {
-    res.json({ error: error.message });
+    res.json({ error: error.message, body: req.body });
   }
 });
 

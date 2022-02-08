@@ -1,0 +1,32 @@
+
+
+### production
+### servidor principal
+GET http://localhost:3000/api/users/me
+atk: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY0NDI0OTA3NiwiZXhwIjoxNjQ0MjUwODc2fQ.hX8fulWDWyacgmAXUTByTa1Kk33fS_F9OW-kD2mwUXU
+
+### logout
+DELETE https://auth-robert.herokuapp.com/logout
+atk: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY0NDI0OTA3NiwiZXhwIjoxNjQ0MjUwODc2fQ.hX8fulWDWyacgmAXUTByTa1Kk33fS_F9OW-kD2mwUXU
+
+
+
+
+### refresh token
+POST https://auth-robert.herokuapp.com/token
+Content-Type: application/json
+
+{
+    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY0NDI0OTAzOX0.MHs0HbjzMPpq-gRgiaHMGK6e3OpFfMTyP5rqgbw_GHE"
+}
+
+
+### login
+POST https://auth-robert.herokuapp.com/login
+Content-Type: application/json
+
+{
+    "email":"castilloroberto186@gmnail.com",
+    "password":"C@stellan0s12"
+}
+
